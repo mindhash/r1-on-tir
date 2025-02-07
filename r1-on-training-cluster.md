@@ -3,7 +3,7 @@
 This document covers steps to deploy Deepseek R1 on training cluster for inference. This approach is quite useful when experimenting with the model or generating synthetic data.
 
 Stages:
-1) Create a Training Cluster 
+1) [Create a Training Cluster](https://github.com/mindhash/r1-on-tir/blob/main/r1-on-training-cluster.md#stage-1)
 2) Open terminal on your laptop and Login to Master node. We will need 3 terminal sessions, so you can start 3 at the start of this stage 
 3) Install sglang and other libraries from the master node 
 4) Start the sglang server on master and worker node 
