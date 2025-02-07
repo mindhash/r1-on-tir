@@ -183,7 +183,7 @@ print(completion.choices[0].message.content)
 - Run the `client.py` on command line: 
 
 ```
-export OPENAI_API_KEY=""
+export OPENAI_API_KEY="xxx"
 python3 /shared/code/client.py
 ```
 
