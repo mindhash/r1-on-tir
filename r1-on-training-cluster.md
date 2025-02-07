@@ -88,7 +88,6 @@ $ ssh root@xx.xxx.xx..x
   $ python3 -m sglang.launch_server --model-path deepseek-ai/DeepSeek-R1 --tp 16 --trust-remote-code --dist-init-addr $MASTER:20000 --nnodes 2 --node-rank 0
 ```
 
-   - 
 ### Terminal 2 (Worker Node)
 2.1) Login to master node (use instructions from TIR)
 
