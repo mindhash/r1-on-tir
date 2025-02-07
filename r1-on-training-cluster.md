@@ -31,23 +31,24 @@ In this stage, we will configure a training cluster with pytorch framework on 16
 From here on, we will use 3 terminal sessions. From each of these terminal the steps will follow. 
 
 ### Terminal 1 (Master Node)
-  1.1) Login to master node (use instructions from TIR)
-    
-    ```
-      # get the exact instruction from TIR 
-      ssh root@xx.xxx.xx..x
-    ```
+  1.1) Login to master node (use instructions from TIR):
+
+```
+# get the exact instruction from TIR 
+$ ssh root@xx.xxx.xx..x
+```   
+      
 
   1.2) Install:
       
-  - Confirm that the shared storage is available. If you cant find it, make sure you followed step 8 (from stage 1)
-        
-    ```
-    $ cd /shared
-    ```
+  - Confirm that the shared storage is available. If you cant find it, make sure you followed step 8 (from stage 1):
+
+      ```
+      $ cd /shared
+      ```
         
   - Execute the following to install libraries and dependencies
-    
+
     ```
     $ sudo apt update && sudo apt install python3-venv
     $ sudo apt update && sudo apt install screen
@@ -66,63 +67,60 @@ From here on, we will use 3 terminal sessions. From each of these terminal the s
     ```
   
    - Lets download the model now. This step will pre-download the model to shared file system. The model is large (1tb+) so wait for 20-25 mins 
-    
-    ```
-    $ export HF_HOME=/shared/hf_home
-    
-    # your token can be found here https://huggingface.co/settings/tokens
-    $ huggingface-cli login --token <your huggingface token>
-    
-    $ huggingface-cli download deepseek-ai/DeepSeek-R1
 
-    ```
-
+     ``` 
+     $ export HF_HOME=/shared/hf_home
+      
+     # your token can be found here https://huggingface.co/settings/tokens
+     $ huggingface-cli login --token <your huggingface token>
+      
+     $ huggingface-cli download deepseek-ai/DeepSeek-R1
+     ```
+    
   1.3) Launch Master Server:  Start a new screen to launch sglang server.  Perform the same steps on terminal 2.
 
-     ```
-     $ screen 
+  ```
+  $ screen  
+  
+  $ cd /shared 
+  $ export HF_HOME=/shared/hf_home
+  $ source /shared/hack_env/bin/activate
+  $ export MASTER=`hostname`
+  $ python3 -m sglang.launch_server --model-path deepseek-ai/DeepSeek-R1 --tp 16 --trust-remote-code --dist-init-addr $MASTER:20000 --nnodes 2 --node-rank 0
+```
 
-     ```
-
-     ```
-     $ cd /shared 
-     $ export HF_HOME=/shared/hf_home
-     $ source /shared/hack_env/bin/activate
-     $ export MASTER=`hostname`
-     $ python3 -m sglang.launch_server --model-path deepseek-ai/DeepSeek-R1 --tp 16 --trust-remote-code --dist-init-addr $MASTER:20000 --nnodes 2 --node-rank 0
-     ```
    - 
 ### Terminal 2 (Worker Node)
 2.1) Login to master node (use instructions from TIR)
 
-    ```
-    # get the exact instruction from TIR 
-    ssh root@xx.xxx.xx..x
-    ```
+```
+# get the exact instruction from TIR 
+ssh root@xx.xxx.xx..x
+```
+
 2.2) Continue further only after 1.2 is completed
+
 2.3) SSH in to Worker node:
 
-    ```
-    export WORKER=`hostname | sed  's/master/worker/g'`
-    ssh $WORKER
+```
+export WORKER=`hostname | sed  's/master/worker/g'`
+ssh $WORKER
 
-    ```
+```
 2.4) Execute the steps to start sglang server on worker:
-    
-    ```
-    $ screen 
-    ```
 
-    
-    
-    ```
-    # these steps may look similar to master on first glance but copy these exactly as they are actually different. 
-    
-    $ export HF_HOME=/shared/hf_cache
-    $ source /shared/hack_env/bin/activate
-    $ export MASTER=`hostname | sed  's/worker/master/g'`
-    $ python3 -m sglang.launch_server --model-path deepseek-ai/DeepSeek-R1 --tp 16 --trust-remote-code --dist-init-addr $MASTER:20000 --nnodes 2 --node-rank 1
-    ```
+```
+$ screen 
+```
+
+```
+# the steps may look similar to master on first glance but copy these exactly as they are actually different. 
+
+$ export HF_HOME=/shared/hf_cache
+$ source /shared/hack_env/bin/activate
+$ export MASTER=`hostname | sed  's/worker/master/g'`
+$ python3 -m sglang.launch_server --model-path deepseek-ai/DeepSeek-R1 --tp 16 --trust-remote-code --dist-init-addr $MASTER:20000 --nnodes 2 --node-rank 1
+```
     
 ### Terminal 3 (API Client for testing API)
 
