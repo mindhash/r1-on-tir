@@ -138,7 +138,10 @@ python3 -m sglang.launch_server --model-path deepseek-ai/DeepSeek-R1 --tp 16 --t
 
 - Wait for the model to load on the master node (Terminal 1). The model is fully loaded once you see the following text:
 ```
-[2025-02-07 15:13:24 TP2] Load weight end. type=DeepseekV3ForCausalLM, dtype=torch.bfloat16, avail mem=37.68 GB
+[2025-02-07 15:46:19] INFO:     Application startup complete.
+[2025-02-07 15:46:19] INFO:     Uvicorn running on http://127.0.0.1:30000 (Press CTRL+C to quit)
+[2025-02-07 15:46:20] INFO:     127.0.0.1:56630 - "GET /get_model_info HTTP/1.1" 200 OK
+[2025-02-07 15:46:33] The server is fired up and ready to roll!
 ```
 
 ### Terminal 3 (API Client for testing API)
@@ -165,7 +168,7 @@ vi /shared/code/client.py
 ```
 import openai
   
-openai.base_url = "http://localhost:20000/v1"
+openai.base_url = "http://localhost:30000/v1/"
 
 completion = openai.chat.completions.create(
     model="deepseek-ai/DeepSeek-R1",
@@ -181,8 +184,8 @@ print(completion.choices[0].message.content)
 
 ```
 export OPENAI_API_KEY=""
-python3 client.py
+python3 /shared/code/client.py
 ```
 
-- You will see response from the model on the console. 
-  
+- You will see response from the model on the console.
+- NOTE: The first request will take some time to complete.
