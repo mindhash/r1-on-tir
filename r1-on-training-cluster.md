@@ -77,7 +77,7 @@ $ ssh root@xx.xxx.xx..x
      $ huggingface-cli download deepseek-ai/DeepSeek-R1
      ```
     
-  1.3) Launch Master Server:  Start a new screen to launch sglang server.  Perform the same steps on terminal 2.
+  1.3) Launch Master Server:  Start a new screen to launch sglang server. Perform the same steps on terminal 2.
 
   ```
   $ screen  
@@ -106,7 +106,7 @@ export WORKER=`hostname | sed  's/master/worker/g'`
 ssh $WORKER
 
 ```
-2.4) Execute the steps to start sglang server on worker:
+2.4) Execute the steps to start sglang server on worker and deploy R1. Since its a large model, this step may take 15-20 mins
 
 ```
 $ screen 
@@ -123,3 +123,13 @@ $ python3 -m sglang.launch_server --model-path deepseek-ai/DeepSeek-R1 --tp 16 -
     
 ### Terminal 3 (API Client for testing API)
 
+3.1) Start a new terminal and login to master node. 
+
+```
+# get the exact instruction from TIR 
+$ ssh root@xx.xxx.xx..x
+```
+
+3.2) Perform the following steps only after steps from terminal 1 & 2 above are complete and the endpoint is active (the log will show the http url with port)
+
+  
