@@ -11,15 +11,15 @@ Stages:
 
 
 ### Stage 1
-1.1 Go to TIR Dashboard
-1.2 Navigate to Training cluster from left-hand sidebar
-1.3 Click on `create cluster` and choose 16xH100 plan. For this experiment, we will also need a shared file system (SFS). So when prompted create a SFS of atleast 1TB. Wait for the cluster to be ready (Assigned status)
-1.4 Click on Deployments tab 
-1.5 Create `Create Deployments`
-1.6 Choose `Pytorch Distributed` as framework and make sure your cluster (Created in 1.3) is selected
-1.7 Click `next` and add/select your SSH key to be added to login (master) node
-1.8 Complete the flow to start a deployment. and wait for the deployment to show `RUNNING` state
-1.9 When deployment is in running state, you would see the list of nodes in `worker` tab on the same page. Locate master node in the table and click on `connect` icon
-1.10 Use the instructions from right-hand sidebar drawer to log into master node. use the same instruction (e.g. ssh admin@xx.xx.x..x) to login from 3 terminal session.
+1) Go to TIR Dashboard
+2) Navigate to Training cluster from left-hand sidebar
+3) Click on `create cluster` and choose 16xH100 plan. For this experiment, we will also need a shared file system (SFS). So when prompted create a SFS of atleast 1TB. Wait for the cluster to be ready (Assigned status)
+4) Click on Deployments tab 
+5) Create `Create Deployments`
+6) Choose `Pytorch Distributed` as framework and make sure your cluster (Created in 1.3) is selected
+7) Click `next` and add/select your SSH key to be added to login (master) node
+8) Complete the flow to start a deployment. and wait for the deployment to show `RUNNING` state
+9) When deployment is in running state, you would see the list of nodes in `worker` tab on the same page. Locate master node in the table and click on `connect` icon
+10) Use the instructions from right-hand sidebar drawer to log into master node. use the same instruction (e.g. ssh admin@xx.xx.x..x) to login from 3 terminal session.
 
 
