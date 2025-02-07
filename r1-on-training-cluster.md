@@ -37,7 +37,8 @@ In this stage, we will configure a training cluster with pytorch framework on 16
 9) Complete the flow to start a deployment. and wait for the deployment to show `RUNNING` state
 10) When deployment is in running state, you would see the list of nodes in `worker` tab on the same page. Locate master node in the table and click on `connect` icon
 
-![Uploading image.png…]()
+<img width="1201" alt="image" src="https://github.com/user-attachments/assets/3f5c2bc5-5ef0-4396-8ba1-34873e74a659" />
+
 
 11) Use the instructions from right-hand sidebar drawer to log into master node. use the same instruction (e.g. `ssh admin@xx.xx.x..x`) to login from 3 terminal session.
 
