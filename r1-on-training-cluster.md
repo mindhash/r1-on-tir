@@ -20,27 +20,26 @@ In this stage, we will configure a training cluster with pytorch framework on 16
 <img width="1454" alt="image" src="https://github.com/user-attachments/assets/b71c4334-50b2-4b09-bda6-55a0e56d82ff" />
 
 3) Click on `create cluster` and choose 16xH100 plan. For this experiment, we will also need a shared file system (SFS). So when prompted create a SFS of atleast 1TB. Wait for the cluster to be ready (Assigned status). 
-4) Click on Deployments tab 
-5) Create `Create Deployments`
-6) Choose `Pytorch Distributed` as framework and make sure your cluster (Created in 1.3) is selected
+4) In the next step,  hoose `Pytorch Distributed` as framework and make sure your cluster (Created in 1.3) is selected. Select the number of workers as 2 and leave the worker configuration as default (GPU: 8).
 
 <img width="1204" alt="image" src="https://github.com/user-attachments/assets/f93aba6a-c34b-477c-b810-0c3c63b15bf7" />
 
-7) Click `next` and add/select your SSH key to be added to login (master) node.
+5) Click `next` and add/select your SSH key to be added to login (master) node.
 
 <img width="1176" alt="image" src="https://github.com/user-attachments/assets/43db303f-30fb-419e-adda-d6dcf0f1a852" />
 
-8) Choose SFS (created in 3) in next step and choose `/shared` as mount location
+6) Choose SFS (created in 3) in next step and choose `/shared` as mount location and then click on "Finish" button.
 
 <img width="1192" alt="image" src="https://github.com/user-attachments/assets/cf4306dd-c1d4-4233-8eaa-41a6a04d28e5" />
 
-9) Complete the flow to start a deployment. and wait for the deployment to show `RUNNING` state
-10) When deployment is in running state, you would see the list of nodes in `worker` tab on the same page. Locate master node in the table and click on `connect` icon
+7) Click on "Create" button to create the cluster and the deployment.
+8) Now, select the "Deployments" tab from above and wait for the deployment to show `RUNNING` state, the current status should show "Created".
+10) When deployment is in running state, you would see the list of nodes in `worker` tab on the same page. Wait for these workers to get into "Running" state. Locate master node in the table and click on `connect` icon
 
 <img width="1201" alt="image" src="https://github.com/user-attachments/assets/3f5c2bc5-5ef0-4396-8ba1-34873e74a659" />
 
 
-11) Use the instructions from right-hand sidebar drawer to log into master node. use the same instruction (e.g. `ssh admin@xx.xx.x..x`) to login from 3 terminal session.
+9) Use the instructions from right-hand sidebar drawer to log into master node. use the same instruction (e.g. `ssh admin@xx.xx.x..x`) to login from 3 terminal session.
 
 ## Stage 2
 
