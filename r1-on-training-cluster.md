@@ -7,7 +7,7 @@ Stages:
 2) [Login to cluster nodes - master and worker](https://github.com/mindhash/r1-on-tir/blob/main/r1-on-training-cluster.md#stage-2)
 3) [Install sglang and other libraries from the master node](https://github.com/mindhash/r1-on-tir/blob/main/r1-on-training-cluster.md#terminal-1-master-node)
 4) Start the sglang server on [master](https://github.com/mindhash/r1-on-tir/blob/main/r1-on-training-cluster.md#terminal-1-master-node) and [worker](https://github.com/mindhash/r1-on-tir/blob/main/r1-on-training-cluster.md#terminal-2-worker-node)
-5) Test R1 endpoint
+5) [Test R1 endpoint](https://github.com/mindhash/r1-on-tir/blob/main/r1-on-training-cluster.md#terminal-3-api-client-for-testing-api)
 
 
 ## Stage 1
