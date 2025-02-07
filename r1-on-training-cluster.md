@@ -34,7 +34,7 @@ In this stage, we will configure a training cluster with pytorch framework on 16
 
 7) Click on "Create" button to create the cluster and the deployment.
 8) Now, select the "Deployments" tab from above and wait for the deployment to show `RUNNING` state, the current status should show "Created".
-10) When deployment is in running state, you would see the list of nodes in `worker` tab on the same page. Wait for these workers to get into "Running" state. Locate master node in the table and click on `connect` icon
+10) You would see the list of nodes in `worker` tab on the same page. Wait for these workers to get into "Running" from "Pending" state. Locate master node in the table and click on `connect` icon
 
 <img width="1201" alt="image" src="https://github.com/user-attachments/assets/3f5c2bc5-5ef0-4396-8ba1-34873e74a659" />
 
@@ -49,7 +49,7 @@ From here on, we will use 3 terminal sessions. From each of these terminal the s
 
   1.1) Login to master node (use instructions from TIR):
 
-```
+``` sh
 # get the exact instruction from TIR 
 $ ssh root@xx.xxx.xx..x
 ```   
@@ -59,31 +59,31 @@ $ ssh root@xx.xxx.xx..x
       
   - Confirm that the shared storage is available. If you cant find it, make sure you followed step 8 (from stage 1):
 
-      ```
+      ``` sh
       $ cd /shared
       ```
         
   - Execute the following to install libraries and dependencies
 
-    ```
-    $ sudo apt update && sudo apt install python3-venv
-    $ sudo apt update && sudo apt install screen
+    ``` sh
+    $ sudo apt update && sudo apt install -y python3-venv
+    $ sudo apt update && sudo apt install -y screen
     
     $ cd /shared
-    $ python3 -m venv hack_env
+    $ sudo python3 -m venv hack_env
     $ source hack_env/bin/activate
-    $ pip3 install huggingface_hub openai
-    $ pip install --upgrade pip
+    $ sudo pip3 install huggingface_hub openai
+    $ sudo pip install --upgrade pip
     
-    $ pip install sgl-kernel --force-reinstall --no-deps
+    $ sudo pip install sgl-kernel --force-reinstall --no-deps
     
-    $ pip install "sglang[all]>=0.4.2.post2" --find-links https://flashinfer.ai/whl/cu124/torch2.5/flashinfer/
+    $ sudo pip install "sglang[all]>=0.4.2.post2" --find-links https://flashinfer.ai/whl/cu124/torch2.5/flashinfer/
 
     ```
   
    - Lets download the model now. This step will pre-download the model to shared file system. The model is large (1tb+) so wait for 20-25 mins 
 
-     ``` 
+     ``` sh
      $ export HF_HOME=/shared/hf_home
       
      # your token can be found here https://huggingface.co/settings/tokens
