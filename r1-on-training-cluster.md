@@ -135,7 +135,12 @@ export MASTER=`hostname | sed  's/worker/master/g'`
 export HF_HOME=/shared/hf_home
 python3 -m sglang.launch_server --model-path deepseek-ai/DeepSeek-R1 --tp 16 --trust-remote-code --dist-init-addr $MASTER:20000 --nnodes 2 --node-rank 1
 ```
-    
+
+- Wait for the model to load on the master node (Terminal 1). The model is fully loaded once you see the following text:
+```
+[2025-02-07 15:13:24 TP2] Load weight end. type=DeepseekV3ForCausalLM, dtype=torch.bfloat16, avail mem=37.68 GB
+```
+
 ### Terminal 3 (API Client for testing API)
 
 3.1) Start a new terminal and login to master node. 
@@ -150,7 +155,9 @@ $ ssh root@xx.xxx.xx..x
 - create a python file
 
 ```
-vi /shared/client.py
+sudo mkdir -p /shared/code
+sudo chown admin:admin /shared/code
+vi /shared/code/client.py
 ```
 
 - Copy and paste these contents to the file. Change the prompt if needed. Save and exit. 
@@ -173,6 +180,7 @@ print(completion.choices[0].message.content)
 - Run the `client.py` on command line: 
 
 ```
+export OPENAI_API_KEY=""
 python3 client.py
 ```
 
