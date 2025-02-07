@@ -10,16 +10,40 @@ Stages:
 5) Test R1 endpoint 
 
 
-### Stage 1
+## Stage 1
+
+In this stage, we will configure a training cluster with pytorch framework on 16xH100.
+
 1) Go to TIR Dashboard
 2) Navigate to Training cluster from left-hand sidebar
-3) Click on `create cluster` and choose 16xH100 plan. For this experiment, we will also need a shared file system (SFS). So when prompted create a SFS of atleast 1TB. Wait for the cluster to be ready (Assigned status)
+3) Click on `create cluster` and choose 16xH100 plan. For this experiment, we will also need a shared file system (SFS). So when prompted create a SFS of atleast 1TB. Wait for the cluster to be ready (Assigned status). Choose `/shared` mount location for shared storage.
 4) Click on Deployments tab 
 5) Create `Create Deployments`
 6) Choose `Pytorch Distributed` as framework and make sure your cluster (Created in 1.3) is selected
 7) Click `next` and add/select your SSH key to be added to login (master) node
 8) Complete the flow to start a deployment. and wait for the deployment to show `RUNNING` state
 9) When deployment is in running state, you would see the list of nodes in `worker` tab on the same page. Locate master node in the table and click on `connect` icon
-10) Use the instructions from right-hand sidebar drawer to log into master node. use the same instruction (e.g. ssh admin@xx.xx.x..x) to login from 3 terminal session.
+10) Use the instructions from right-hand sidebar drawer to log into master node. use the same instruction (e.g. `ssh admin@xx.xx.x..x`) to login from 3 terminal session.
 
+## Stage 2
+
+From here on, we will use 3 terminal sessions. From each of these terminal the steps will follow. 
+
+### Terminal 1 (Master Node)
+  1.1) Login to master node (use instructions from TIR)
+  
+  1.2) Install:
+        - Make sure shared storage is available. If
+        ```
+          cd /shared
+        ```
+        - 
+        
+
+### Terminal 2 (Worker Node)
+2.1) Login to master node (use instructions from TIR)
+2.2) Continue further only after 1.2 is completed
+2.3)
+
+### Terminal 3 (API Client for testing API)
 
