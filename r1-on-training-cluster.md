@@ -5,8 +5,8 @@ This document covers steps to deploy Deepseek R1 on training cluster for inferen
 Stages:
 1) [Create a Training Cluster](https://github.com/mindhash/r1-on-tir/blob/main/r1-on-training-cluster.md#stage-1)
 2) [Login to cluster nodes - master and worker](https://github.com/mindhash/r1-on-tir/blob/main/r1-on-training-cluster.md#stage-2)
-3) Install sglang and other libraries from the master node
-4) Start the sglang server on master and worker node
+3) [Install sglang and other libraries from the master node](https://github.com/mindhash/r1-on-tir/blob/main/r1-on-training-cluster.md#terminal-1-master-node)
+4) Start the sglang server on [master](https://github.com/mindhash/r1-on-tir/blob/main/r1-on-training-cluster.md#terminal-1-master-node) and [worker](https://github.com/mindhash/r1-on-tir/blob/main/r1-on-training-cluster.md#terminal-2-worker-node)
 5) Test R1 endpoint
 
 
@@ -90,7 +90,7 @@ $ ssh root@xx.xxx.xx..x
 ```
 
 ### Terminal 2 (Worker Node)
-2.1) Login to master node (use instructions from TIR)
+2.1) Training cluster supports a single poing of entry. So to access worker, we must first login in to master node
 
 ```
 # get the exact instruction from TIR 
