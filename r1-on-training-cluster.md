@@ -60,24 +60,24 @@ $ ssh root@xx.xxx.xx..x
   - Confirm that the shared storage is available. If you cant find it, make sure you followed step 8 (from stage 1):
 
       ``` sh
-      $ cd /shared
+      cd /shared
       ```
         
   - Execute the following to install libraries and dependencies
 
     ``` sh
-    $ sudo apt update && sudo apt install -y python3-venv
-    $ sudo apt update && sudo apt install -y screen
+    sudo apt update && sudo apt install -y python3-venv
+    sudo apt update && sudo apt install -y screen
     
-    $ cd /shared
-    $ sudo python3 -m venv hack_env
-    $ source hack_env/bin/activate
-    $ sudo pip3 install huggingface_hub openai
-    $ sudo pip install --upgrade pip
+    cd /shared
+    sudo python3 -m venv hack_env
+    source hack_env/bin/activate
+    sudo pip3 install huggingface_hub openai
+    sudo pip install --upgrade pip
     
-    $ sudo pip install sgl-kernel --force-reinstall --no-deps
+    sudo pip install sgl-kernel --force-reinstall --no-deps
     
-    $ sudo pip install "sglang[all]>=0.4.2.post2" --find-links https://flashinfer.ai/whl/cu124/torch2.5/flashinfer/
+    sudo pip install "sglang[all]>=0.4.2.post2" --find-links https://flashinfer.ai/whl/cu124/torch2.5/flashinfer/
 
     ```
   
@@ -85,9 +85,9 @@ $ ssh root@xx.xxx.xx..x
 
      ``` sh
      # your token can be found here https://huggingface.co/settings/tokens
-     $ sudo huggingface-cli login --token <your huggingface token>
+     sudo huggingface-cli login --token <your huggingface token>
       
-     $ sudo HF_HOME=/shared/hf_home huggingface-cli download deepseek-ai/DeepSeek-R1
+     sudo HF_HOME=/shared/hf_home huggingface-cli download deepseek-ai/DeepSeek-R1
      ```
 
   - If the download stops in the middle you can run the above command again, it should resume from where it left off.
@@ -99,7 +99,8 @@ $ ssh root@xx.xxx.xx..x
   
   cd /shared
   source /shared/hack_env/bin/activate
-  sudo MASTER=`hostname` HF_HOME=/shared/hf_home python3 -m sglang.launch_server --model-path deepseek-ai/DeepSeek-R1 --tp 16 --trust-remote-code --dist-init-addr $MASTER:20000 --nnodes 2 --node-rank 0
+  export MASTER=`hostname`
+  sudo MASTER=$MASTER HF_HOME=/shared/hf_home python3 -m sglang.launch_server --model-path deepseek-ai/DeepSeek-R1 --tp 16 --trust-remote-code --dist-init-addr $MASTER:20000 --nnodes 2 --node-rank 0
 ```
 
 ### Terminal 2 (Worker Node)
@@ -122,16 +123,16 @@ ssh $WORKER
 2.4) Execute the steps to start sglang server on worker and deploy R1. Since its a large model, this step may take 15-20 mins
 
 ```
-$ screen 
+sudo apt-get update && sudo apt-get install -y screen
+screen 
 ```
 
 ```
 # the steps may look similar to master on first glance but copy these exactly as they are actually different. 
 
-$ export HF_HOME=/shared/hf_cache
-$ source /shared/hack_env/bin/activate
-$ export MASTER=`hostname | sed  's/worker/master/g'`
-$ python3 -m sglang.launch_server --model-path deepseek-ai/DeepSeek-R1 --tp 16 --trust-remote-code --dist-init-addr $MASTER:20000 --nnodes 2 --node-rank 1
+source /shared/hack_env/bin/activate
+export MASTER=`hostname | sed  's/worker/master/g'`
+sudo HF_HOME=/shared/hf_cache MASTER=$MASTER python3 -m sglang.launch_server --model-path deepseek-ai/DeepSeek-R1 --tp 16 --trust-remote-code --dist-init-addr $MASTER:20000 --nnodes 2 --node-rank 1
 ```
     
 ### Terminal 3 (API Client for testing API)
