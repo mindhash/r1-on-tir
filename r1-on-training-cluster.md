@@ -87,11 +87,13 @@ $ ssh root@xx.xxx.xx..x
      $ export HF_HOME=/shared/hf_home
       
      # your token can be found here https://huggingface.co/settings/tokens
-     $ huggingface-cli login --token <your huggingface token>
+     $ sudo huggingface-cli login --token <your huggingface token>
       
-     $ huggingface-cli download deepseek-ai/DeepSeek-R1
+     $ sudo huggingface-cli download deepseek-ai/DeepSeek-R1
      ```
-    
+
+  - If the download stops in the middle you can run the above command again, it should resume from where it left off.
+
   1.3) Launch Master Server:  Start a new screen to launch sglang server. Perform the same steps on terminal 2.
 
   ```
