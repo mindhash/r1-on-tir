@@ -57,7 +57,7 @@ $ ssh root@xx.xxx.xx..x
     $ cd /shared
     $ python3 -m venv hack_env
     $ source hack_env/bin/activate
-    $ pip3 install huggingface_hub
+    $ pip3 install huggingface_hub openai
     $ pip install --upgrade pip
     
     $ pip install sgl-kernel --force-reinstall --no-deps
@@ -132,4 +132,34 @@ $ ssh root@xx.xxx.xx..x
 
 3.2) Perform the following steps only after steps from terminal 1 & 2 above are complete and the endpoint is active (the log will show the http url with port)
 
+- create a python file
+
+```
+vi /shared/client.py
+```
+
+- Copy and paste these contents to the file. Change the prompt if needed. Save and exit. 
+
+```
+import openai
+  
+openai.base_url = "http://localhost:20000/v1"
+
+completion = openai.chat.completions.create(
+    model="deepseek-ai/DeepSeek-R1",
+    messages=[
+        {"role": "user", "content": "program for checking wheather the number is prime"},
+    ],
+    
+)
+print(completion.choices[0].message.content)
+```
+
+- Run the `client.py` on command line: 
+
+```
+python3 client.py
+```
+
+- You will see response from the model on the console. 
   
