@@ -97,11 +97,9 @@ $ ssh root@xx.xxx.xx..x
   ```
   $ screen  
   
-  $ cd /shared 
-  $ export HF_HOME=/shared/hf_home
-  $ source /shared/hack_env/bin/activate
-  $ export MASTER=`hostname`
-  $ python3 -m sglang.launch_server --model-path deepseek-ai/DeepSeek-R1 --tp 16 --trust-remote-code --dist-init-addr $MASTER:20000 --nnodes 2 --node-rank 0
+  cd /shared
+  source /shared/hack_env/bin/activate
+  sudo MASTER=`hostname` HF_HOME=/shared/hf_home python3 -m sglang.launch_server --model-path deepseek-ai/DeepSeek-R1 --tp 16 --trust-remote-code --dist-init-addr $MASTER:20000 --nnodes 2 --node-rank 0
 ```
 
 ### Terminal 2 (Worker Node)
