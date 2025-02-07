@@ -132,7 +132,8 @@ screen
 
 source /shared/hack_env/bin/activate
 export MASTER=`hostname | sed  's/worker/master/g'`
-sudo HF_HOME=/shared/hf_cache MASTER=$MASTER python3 -m sglang.launch_server --model-path deepseek-ai/DeepSeek-R1 --tp 16 --trust-remote-code --dist-init-addr $MASTER:20000 --nnodes 2 --node-rank 1
+export HF_HOME=/shared/hf_home
+python3 -m sglang.launch_server --model-path deepseek-ai/DeepSeek-R1 --tp 16 --trust-remote-code --dist-init-addr $MASTER:20000 --nnodes 2 --node-rank 1
 ```
     
 ### Terminal 3 (API Client for testing API)
