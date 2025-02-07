@@ -84,12 +84,10 @@ $ ssh root@xx.xxx.xx..x
    - Lets download the model now. This step will pre-download the model to shared file system. The model is large (1tb+) so wait for 20-25 mins 
 
      ``` sh
-     $ export HF_HOME=/shared/hf_home
-      
      # your token can be found here https://huggingface.co/settings/tokens
      $ sudo huggingface-cli login --token <your huggingface token>
       
-     $ sudo huggingface-cli download deepseek-ai/DeepSeek-R1
+     $ sudo HF_HOME=/shared/hf_home huggingface-cli download deepseek-ai/DeepSeek-R1
      ```
 
   - If the download stops in the middle you can run the above command again, it should resume from where it left off.
